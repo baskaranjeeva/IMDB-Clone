@@ -1,15 +1,16 @@
 import React from "react";
 
-function MovieCard() {
+function MovieCard({ movieObject }) {
   return (
-    <div>
-      <img
-        className="w-[200px] h-[40vh] bg-cover pointer-events-auto"
-        style={{
-          backgroundImage:
-            "url(https://m.media-amazon.com/images/I/91SpnOlQP+L._AC_UF1000,1000_QL80_.jpg)",
-        }}
-      />
+    <div
+      className="w-[200px] h-[40vh] bg-cover content-center"
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieObject.poster_path})`,
+      }}
+    >
+      <h5 className="text-white text-center text-xl bg-gray-800/50 rounded-lg">
+        {movieObject.title}
+      </h5>
     </div>
   );
 }

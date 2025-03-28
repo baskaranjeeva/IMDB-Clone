@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Watchlist from "./components/Watchlist";
 import MoviesRecommendations from "./components/MoviesRecommendations";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Movies from "./components/Movies";
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
             element={
               <>
                 <Banner />
-                <div className="flex flex-wrap justify-center gap-8 ml-5 mr-5">
+                {/* <div className="flex flex-wrap justify-center gap-8 ml-5 mr-5">
                   <MovieCard />
-                </div>
+                </div> */}
+                <Movies />
               </>
             }
           />
