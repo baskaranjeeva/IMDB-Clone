@@ -1,15 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import genreids from "../utilities/genre";
 
 function Watchlist({ watchlist }) {
   const [search, setSearch] = useState("");
+  const [genreList, setGenreList] = useState([]);
+  const [currGenre, setCurrGenre] = useState("All Genres");
+
+  useEffect(() => {
+    let temp = watchlist.map((movieObj) => {
+      return genreids[movieObj.genre_ids[0]];
+    });
+    temp = new Set(temp);
+    setGenreList(["All Genres", ...temp]);
+    console.log(genreList);
+  }, [watchlist]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
     console.log(search);
   }
+  function handleFilter(genre) {
+    setCurrGenre(genre);
+  }
   return (
     <div>
-      {/* genre Filter */}
+      <div className="flex justify-center m-4">
+        {/* genre Filter */}
+        {genreList.map((genre) => {
+          return (
+            <div
+              onClick={() => handleFilter(genre)}
+              className={
+                currGenre == genre
+                  ? "flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold mx-4 cursor-pointer"
+                  : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl text-white font-bold mx-4 cursor-pointer"
+              }
+            >
+              {genre}
+            </div>
+          );
+        })}
+      </div>
       <div className="flex justify-center items-center m-4">
         {/* Search box */}
         <input
@@ -35,6 +66,13 @@ function Watchlist({ watchlist }) {
           <tbody>
             {watchlist
               .filter((movieObj) => {
+                if (currGenre == "All Genres") {
+                  return true;
+                } else {
+                  return genreids[movieObj.genre_ids[0]] == currGenre;
+                }
+              })
+              .filter((movieObj) => {
                 return movieObj.title
                   .toLowerCase()
                   .includes(search.toLowerCase());
@@ -51,7 +89,7 @@ function Watchlist({ watchlist }) {
                     </td>
                     <td>{movieObj.vote_average}</td>
                     <td>{movieObj.popularity}</td>
-                    <td>Action</td>
+                    <td>{genreids[movieObj.genre_ids[0]]}</td>
                     <td className="text-red-500">Delete</td>
                   </tr>
                 );
