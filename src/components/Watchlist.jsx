@@ -6,7 +6,8 @@ function Watchlist({ watchlist }) {
   const [genreList, setGenreList] = useState([]);
   const [currGenre, setCurrGenre] = useState("All Genres");
   const [sortAsc, setSortAsc] = useState(false);
-  const [sortDec, setScorDec] = useState(false);
+  const [sortDec, setSortDec] = useState(false);
+  const [delWatchlist, setDelWatchList] = useState(false);
 
   useEffect(() => {
     let temp = watchlist.map((movieObj) => {
@@ -15,7 +16,7 @@ function Watchlist({ watchlist }) {
     temp = new Set(temp);
     setGenreList(["All Genres", ...temp]);
     // console.log(genreList);
-  }, [watchlist, sortAsc, sortDec]);
+  }, [watchlist, sortAsc, sortDec, delWatchlist]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
@@ -38,10 +39,21 @@ function Watchlist({ watchlist }) {
     // for (let i = 0; i < watchlist.length; i++) {
     //   console.log(watchlist[i].vote_average);
     // }
-    setScorDec(true);
+    setSortDec(true);
     setSortAsc(false);
   }
+  // console.log(watchlist);
+  function deleteMovie(del_movie_obj) {
+    for (let i = 0; i < watchlist.length; i++) {
+      if (watchlist[i].id == del_movie_obj.id) {
+        delete watchlist[i];
+        setDelWatchList(true);
+      }
+    }
+  }
+
   console.log(watchlist);
+
   return (
     <div>
       <div className="flex justify-center m-4">
@@ -121,7 +133,12 @@ function Watchlist({ watchlist }) {
                     <td>{movieObj.vote_average}</td>
                     <td>{movieObj.popularity}</td>
                     <td>{genreids[movieObj.genre_ids[0]]}</td>
-                    <td className="text-red-500">Delete</td>
+                    <td
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => deleteMovie(movieObj)}
+                    >
+                      Delete
+                    </td>
                   </tr>
                 );
               })}
