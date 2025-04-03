@@ -5,6 +5,8 @@ function Watchlist({ watchlist }) {
   const [search, setSearch] = useState("");
   const [genreList, setGenreList] = useState([]);
   const [currGenre, setCurrGenre] = useState("All Genres");
+  const [sortAsc, setSortAsc] = useState(false);
+  const [sortDec, setScorDec] = useState(false);
 
   useEffect(() => {
     let temp = watchlist.map((movieObj) => {
@@ -12,16 +14,34 @@ function Watchlist({ watchlist }) {
     });
     temp = new Set(temp);
     setGenreList(["All Genres", ...temp]);
-    console.log(genreList);
-  }, [watchlist]);
+    // console.log(genreList);
+  }, [watchlist, sortAsc, sortDec]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
-    console.log(search);
+    // console.log(search);
   }
   function handleFilter(genre) {
     setCurrGenre(genre);
   }
+  function sortAscending() {
+    watchlist.sort((a, b) => a.vote_average - b.vote_average);
+    // for (let i = 0; i < watchlist.length; i++) {
+    //   console.log(watchlist[i].vote_average);
+    // }
+    setSortAsc(true);
+    setSortDec(false);
+    console.log(watchlist);
+  }
+  function sortDecending() {
+    watchlist.sort((a, b) => b.vote_average - a.vote_average);
+    // for (let i = 0; i < watchlist.length; i++) {
+    //   console.log(watchlist[i].vote_average);
+    // }
+    setScorDec(true);
+    setSortAsc(false);
+  }
+  console.log(watchlist);
   return (
     <div>
       <div className="flex justify-center m-4">
@@ -57,7 +77,18 @@ function Watchlist({ watchlist }) {
           <thead className="bg-gray-300 ">
             <tr className="h-[3rem]">
               <th>Name</th>
-              <th>Ratings</th>
+              <th>
+                <i
+                  class="fa-solid fa-arrow-up cursor-pointer"
+                  onClick={() => sortAscending()}
+                ></i>{" "}
+                Ratings
+                {"  "}
+                <i
+                  class="fa-solid fa-arrow-down cursor-pointer"
+                  onClick={() => sortDecending()}
+                ></i>
+              </th>
               <th>Popularity</th>
               <th>Genre</th>
               <th>Delete Movies</th>
