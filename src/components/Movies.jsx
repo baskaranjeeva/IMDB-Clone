@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import axios from "axios";
 import Pagination from "./Pagination";
-function Movies({ addWatchList, watchlist }) {
+function Movies() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   function prevPage() {
@@ -31,11 +31,7 @@ function Movies({ addWatchList, watchlist }) {
     <div>
       <div className="flex flex-wrap justify-evenly gap-8 m-5">
         {movies.map((movieObj) => (
-          <MovieCard
-            movieObject={movieObj}
-            finalAddWatchList={addWatchList}
-            watchlist={watchlist}
-          />
+          <MovieCard movieObject={movieObj} />
         ))}
       </div>
       <Pagination pageNo={page} prePg={prevPage} nxtPg={nextPage} />

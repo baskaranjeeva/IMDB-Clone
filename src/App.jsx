@@ -7,9 +7,11 @@ import MoviesRecommendations from "./components/MoviesRecommendations";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Movies from "./components/Movies";
 import { useState, useEffect } from "react";
+import { MovieContext } from "./components/MovieContext";
 
 function App() {
   const [watchlist, setWatchList] = useState([]);
+
   const handleAddWatchList = (movieObj) => {
     let updatedWatchlist = [...watchlist, movieObj];
     setWatchList(updatedWatchlist);
@@ -27,31 +29,30 @@ function App() {
   // console.log(watchlist);
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Banner />
-                {/* <div className="flex flex-wrap justify-center gap-8 ml-5 mr-5">
+      <MovieContext.Provider value={({ handleAddWatchList }, { watchlist })}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Banner />
+                  {/* <div className="flex flex-wrap justify-center gap-8 ml-5 mr-5">
                   <MovieCard />
-                </div> */}
-                <Movies
-                  addWatchList={handleAddWatchList}
-                  watchlist={watchlist}
-                />
-              </>
-            }
-          />
-          <Route
-            path="/watchlist"
-            element={<Watchlist watchlist={watchlist} />}
-          />
-          <Route path="/recommend" element={<MoviesRecommendations />} />
-        </Routes>
-      </BrowserRouter>
+                  </div> */}
+                  <Movies />
+                </>
+              }
+            />
+            <Route
+              path="/watchlist"
+              element={<Watchlist watchlist={watchlist} />}
+            />
+            <Route path="/recommend" element={<MoviesRecommendations />} />
+          </Routes>
+        </BrowserRouter>
+      </MovieContext.Provider>
     </div>
   );
 }

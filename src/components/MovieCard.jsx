@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MovieContext } from "./MovieContext";
+function MovieCard({ movieObject }) {
+  let { handleAddWatchList, watchlist } = useContext(MovieContext);
 
-function MovieCard({ movieObject, finalAddWatchList, watchlist }) {
   function doesContain(movieObj) {
     for (let i = 0; i < watchlist.length; i++) {
       if (watchlist[i].id === movieObj.id) {
@@ -20,7 +22,7 @@ function MovieCard({ movieObject, finalAddWatchList, watchlist }) {
         <div className="flex justify-end mr-1 mt-1">&#10060;</div>
       ) : (
         <div
-          onClick={() => finalAddWatchList(movieObject)}
+          onClick={() => handleAddWatchList(movieObject)}
           className="flex justify-end mr-1 mt-1 cursor-pointer"
         >
           &#128151;
