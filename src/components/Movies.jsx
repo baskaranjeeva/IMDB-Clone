@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import axios from "axios";
 import Pagination from "./Pagination";
+import { useSelector, useDispatch } from "react-redux";
+import store from "../redux/store";
 function Movies() {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  function prevPage() {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }
-  function nextPage() {
-    setPage(page + 1);
-  }
-  console.log(movies);
+  const page = useSelector((store) => store.page.pageNo);
+  // console.log(page);
+  // const [page, setPage] = useState(1);
+  // function prevPage() {
+  //   if (page > 1) {
+  //     setPage(page - 1);
+  //   }
+  // }
+  // function nextPage() {
+  //   setPage(page + 1);
+  // }
+  // console.log(movies);
   useEffect(() => {
     axios
       .get(
@@ -34,7 +38,7 @@ function Movies() {
           <MovieCard movieObject={movieObj} />
         ))}
       </div>
-      <Pagination pageNo={page} prePg={prevPage} nxtPg={nextPage} />
+      <Pagination />
     </div>
   );
 }
