@@ -49,7 +49,6 @@ function App() {
               path="/watchlist"
               element={<Watchlist watchlist={watchlist} />}
             />
-            <Route path="/recommend" element={<MoviesRecommendations />} />
           </Routes>
         </BrowserRouter>
       </MovieContext.Provider>

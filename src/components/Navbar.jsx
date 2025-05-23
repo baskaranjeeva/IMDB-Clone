@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="flex justify-between  items-center bg-teal-800  ">
+    <div className="flex justify-start  items-center w-[85%]  m-auto">
       <div>
         <img className="w-[80px]" src={Logo} />
       </div>
-      <div className="w-[30rem] flex justify-evenly text-lg font-bold text-white">
+      <div className="w-[25rem] flex justify-start ml-10 gap-10 text-2xl font-bold text-blue-600">
         <Link to="/">Movies</Link>
         <Link to="/watchlist">Watchlist</Link>
-        <Link to="/recommend">Movies Recommondations</Link>
       </div>
     </div>
   );

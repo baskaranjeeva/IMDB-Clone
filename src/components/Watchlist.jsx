@@ -76,7 +76,7 @@ function Watchlist({ watchlist }) {
       <div className="flex justify-center items-center m-4">
         {/* Search box */}
         <input
-          className="w-[18rem] h-[3rem] border-2 border-gray-300"
+          className="w-[18rem] h-[3rem] border-2 pl-2 border-gray-300"
           type="text"
           placeholder="Search Movies"
           onChange={handleSearch}

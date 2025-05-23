@@ -12,7 +12,7 @@ function Pagination() {
     dispatch(action.prevPage());
   };
   return (
-    <div className="w-[100vw] h-[8vh] bg-teal-700 flex justify-center items-center gap-8 text-4xl">
+    <div className="w-[84vw] h-[8vh] mt-5 bg-teal-700 flex justify-center items-center gap-8 text-4xl">
       <div onClick={handlePrevPage}>
         <i class="fa-solid fa-square-caret-left"></i>
       </div>

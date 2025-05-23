@@ -44,13 +44,18 @@ function Movies() {
     return <h1>Ops something went wrong!!!</h1>;
   }
   return (
-    <div>
-      <div className="flex flex-wrap justify-evenly gap-8 m-5">
-        {movies.map((movieObj) => (
-          <MovieCard movieObject={movieObj} />
-        ))}
+    <div className="flex justify-center">
+      <div className="w-[85%]">
+        <h1 className="text-center text-2xl font-semibold mt-5">
+          Popular Movies
+        </h1>
+        <div className="flex flex-wrap justify-evenly gap-8 mt-8">
+          {movies.map((movieObj) => (
+            <MovieCard movieObject={movieObj} />
+          ))}
+        </div>
+        <Pagination />
       </div>
-      <Pagination />
     </div>
   );
 }
